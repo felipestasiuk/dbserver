@@ -1,0 +1,78 @@
+<h1>Inserir voto</h1>
+
+<div class="well">
+	<form #formVoto="ngForm">
+		<div class="form-group">
+			<label for="nome">Nome:</label>
+			<input 
+			type="text"
+			class="form-control"
+			id="nome"
+			name="nome"
+			[(ngModel)]="voto.nome"
+			#nome="ngModel"
+			minlength="3" 
+			required> 
+			<div class="alert alert-danger"
+			*ngIf="nome.errors && (nome.dirty || nome.touched)">
+				<div [hidden]="!nome.errors.required">
+					Digite o nome.
+				</div>
+				<div [hidden]="!nome.errors.minlength">
+					A nome deve conter ao menos 3 caracteres.
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="restaurante">Restaurante:</label>
+			<input 
+			type="text"
+			class="form-control"
+			id="restaurante"
+			name="restaurante"
+			[(ngModel)]="voto.restaurante"
+			#restaurante="ngModel"
+			minlength="3" 
+			required> 
+			<div class="alert alert-danger"
+			*ngIf="restaurante.errors && (restaurante.dirty || restaurante.touched)">
+				<div [hidden]="!restaurante.errors.required">
+					Digite o restaurante.
+				</div>
+				<div [hidden]="!restaurante.errors.minlength">
+					A restaurante deve conter ao menos 3 caracteres.
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="restaurante">Data:</label>
+			<input 
+			type="date"
+			class="form-control"
+			id="data"
+			name="data"
+			[(ngModel)]="voto.data"
+			#data="ngModel"
+			required> 
+			<div class="alert alert-danger"
+			*ngIf="data.errors && (data.dirty || data.touched)">
+				<div [hidden]="!data.errors.required">
+					Informe a data.
+				</div>
+			</div>
+		</div>
+		<div class="form-group text-center">
+			<input 
+			type="submit"
+			class="btn btn-success"
+			value="Inserir"
+			(click)="inserir()"
+			[disabled]="!formVoto.form.valid">
+			<a [routerLink]="['/votos']"
+			class="btn btn-default">
+				<span class="glyphicon glyphicon-chevron-left" 
+				aria-hidden="true"></span> Voltar
+			</a>
+		</div>
+	</form>
+</div>

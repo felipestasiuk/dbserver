@@ -1,0 +1,26 @@
+<h1>Resultado</h1>
+
+<table class="table table-striped table-bordered table-hover">
+	<tbody>
+		<tr>
+			<th class="text-center">Data</th>
+			<th class="text-center">Restaurante</th>
+			<th class="text-center">Votos</th>
+		</tr>
+		<tr *ngFor="let resultado of resultados">
+			<td class="text-center">
+				{{ resultado.data | date: 'dd/MM/yyyy'}}
+			</td>
+			<td class="text-center">
+				{{ resultado.restaurante }}
+			</td>
+			<td class="text-center">
+				{{ resultado.votos }}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<a [routerLink]="['/votos']" class="btn btn-default">
+	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar
+</a>
