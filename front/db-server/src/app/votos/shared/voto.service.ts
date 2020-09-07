@@ -43,7 +43,7 @@ export class VotoService {
     console.log('remover');
     console.log(id);
     console.log(this.urlDeleteVoto + '/' + id);
-    this.http.delete<Voto>(this.urlDeleteVoto + '/' + id)
+    this.http.delete<Voto>(this.urlDeleteVoto + '/' + id, this.httpOptionsDelete)
       .pipe(
         retry(2),
         catchError(this.handleError));
