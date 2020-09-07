@@ -21,6 +21,8 @@
 	</tbody>
 </table>
 
+<p *ngIf="resultados.length==0">Nenhum resultado disponível.</p>
+
 <a [routerLink]="['/votos']" class="btn btn-default">
 	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar
 </a>

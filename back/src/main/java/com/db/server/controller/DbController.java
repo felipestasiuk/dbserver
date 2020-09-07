@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/db")
 public class DbController {
 
@@ -24,7 +25,7 @@ public class DbController {
 
     @PostMapping(path = "/voto/insert")
     @ResponseStatus(HttpStatus.CREATED)
-    public BaseResponse insertVoto(VotoDTO voto) {
+    public BaseResponse insertVoto(@RequestBody VotoDTO voto) {
         return service.insertVoto(voto);
     }
 

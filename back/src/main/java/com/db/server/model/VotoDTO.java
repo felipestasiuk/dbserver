@@ -16,7 +16,8 @@ import java.util.Date;
 @Builder
 public class VotoDTO {
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Long id;
+
     private Date data;
 
     private String nome;

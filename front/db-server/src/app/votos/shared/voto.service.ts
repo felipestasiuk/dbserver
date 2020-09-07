@@ -12,11 +12,15 @@ export class VotoService {
   private readonly urlBase = 'http://localhost:8080/api/db';
   private readonly urlGetVoto = this.urlBase + '/votos';
   private readonly urlPostVoto = this.urlBase + '/voto/insert';
-  private readonly urlDeleteVoto = this.urlBase + '/voto/delete/';
+  private readonly urlDeleteVoto = this.urlBase + '/voto/delete';
   private readonly urlGetResultado = this.urlBase + '/resultado';
 
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  httpOptionsDelete = {
+    headers: new HttpHeaders({ 'accept': '*/*' })
+  }
+
+  httpOptionsPost = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json', 'accept': '*/*' })
   }
 
   constructor(private http: HttpClient) { }
@@ -29,14 +33,17 @@ export class VotoService {
   }
 
   votar(voto: Voto): Observable<Voto[]> {
-    return this.http.post<Voto[]>(this.urlPostVoto, JSON.stringify(voto), this.httpOptions)
+    return this.http.post<Voto[]>(this.urlPostVoto, JSON.stringify(voto), this.httpOptionsPost)
       .pipe(
         retry(2),
         catchError(this.handleError));
   }
 
   remover(id: number): void {
-    this.http.delete<Voto>(this.urlDeleteVoto + '/' + id, this.httpOptions)
+    console.log('remover');
+    console.log(id);
+    console.log(this.urlDeleteVoto + '/' + id);
+    this.http.delete<Voto>(this.urlDeleteVoto + '/' + id)
       .pipe(
         retry(2),
         catchError(this.handleError));

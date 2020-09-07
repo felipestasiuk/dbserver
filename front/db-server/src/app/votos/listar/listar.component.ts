@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VotoService, Voto } from '../shared';
-import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-listar',
@@ -9,23 +8,25 @@ import { Observable } from 'rxjs';
 })
 export class ListarComponent implements OnInit {
 
-	votos: Observable<Voto[]>;
+	votos: Voto[];
 
 	constructor(private votoService: VotoService) { }
 
 	ngOnInit(): void {
-		this.votos = this.listarTodos();
+		this.listarTodos();
 	}
 
-	listarTodos(): Observable<Voto[]> {
-		return this.votoService.listar();
+	listarTodos() {
+		return this.votoService.listar().subscribe(votoAux => {
+				this.votos = votoAux.votos;
+			});
 	}
 
 	remover($event: any, voto: Voto): void {
 		$event.preventDefault();
 		if (confirm('Deseja remover o voto no restaurante "' + voto.restaurante + '"?')) {
 			this.votoService.remover(voto.id);
-			this.votos = this.listarTodos();
+			this.listarTodos();
 		}
 	}
 
