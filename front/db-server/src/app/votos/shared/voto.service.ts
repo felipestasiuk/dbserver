@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse} from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Voto, Resultado } from './';
+import { Voto, Resultado, Retorno } from './';
 
 @Injectable({
   providedIn: 'root'
@@ -25,32 +25,29 @@ export class VotoService {
 
   constructor(private http: HttpClient) { }
 
-  listar(): Observable<Voto[]> {
-  	return this.http.get<Voto[]>(this.urlGetVoto)
+  listar(): Observable<Retorno> {
+  	return this.http.get<Retorno>(this.urlGetVoto)
       .pipe(
         retry(2),
         catchError(this.handleError));
   }
 
-  votar(voto: Voto): Observable<Voto[]> {
-    return this.http.post<Voto[]>(this.urlPostVoto, JSON.stringify(voto), this.httpOptionsPost)
+  votar(voto: Voto): Observable<Retorno> {
+    return this.http.post<Retorno>(this.urlPostVoto, JSON.stringify(voto), this.httpOptionsPost)
       .pipe(
         retry(2),
         catchError(this.handleError));
   }
 
-  remover(id: number): void {
-    console.log('remover');
-    console.log(id);
-    console.log(this.urlDeleteVoto + '/' + id);
-    this.http.delete<Voto>(this.urlDeleteVoto + '/' + id, this.httpOptionsDelete)
+  remover(id: number): Observable<Retorno> {
+    return this.http.delete<Retorno>(this.urlDeleteVoto + '/' + id, this.httpOptionsDelete)
       .pipe(
         retry(2),
         catchError(this.handleError));
   }
 
-  listarResultados(): Observable<Resultado[]> {
-    return this.http.get<Resultado[]>(this.urlGetResultado)
+  listarResultados(): Observable<Retorno> {
+    return this.http.get<Retorno>(this.urlGetResultado)
       .pipe(
         retry(2),
         catchError(this.handleError));

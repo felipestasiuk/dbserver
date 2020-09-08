@@ -23,8 +23,9 @@ export class InserirComponent implements OnInit {
 
 	inserir(): void {
 		if (this.formVoto.form.valid) {
-			this.votoService.votar(this.voto);
-			this.router.navigate(["/votos"]);
+			this.votoService.votar(this.voto).subscribe(retorno => {
+				this.router.navigate(["/votos"]);
+			});
 		}
 	}
 

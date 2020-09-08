@@ -17,8 +17,8 @@ export class ResultadoComponent implements OnInit {
 	}
 
 	listarResultados() {
-		return this.votoService.listarResultados().subscribe(resultadoAux => {
-				this.resultados = resultadoAux.resultados;
+		return this.votoService.listarResultados().subscribe(retorno => {
+				this.resultados = retorno.resultados;
 			});
 	}
 

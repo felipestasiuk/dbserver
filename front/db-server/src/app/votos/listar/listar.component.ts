@@ -17,16 +17,17 @@ export class ListarComponent implements OnInit {
 	}
 
 	listarTodos() {
-		return this.votoService.listar().subscribe(votoAux => {
-				this.votos = votoAux.votos;
+		return this.votoService.listar().subscribe(retorno => {
+				this.votos = retorno.votos;
 			});
 	}
 
 	remover($event: any, voto: Voto): void {
 		$event.preventDefault();
 		if (confirm('Deseja remover o voto no restaurante "' + voto.restaurante + '"?')) {
-			this.votoService.remover(voto.id);
-			this.listarTodos();
+			this.votoService.remover(voto.id).subscribe(retorno => {
+				this.listarTodos();
+			});
 		}
 	}
 
